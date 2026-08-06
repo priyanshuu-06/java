@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>ATM PIN Verification</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                text-align: center;
+                padding: 40px;
+            }
+            h2 {
+                color: #1a5cff;
+                margin: 5px 0;
+            }
+            input {
+                padding: 8px;
+                font-size: 15px;
+                margin-top: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            button {
+                display: block;
+                margin: 15px auto 0;
+                padding: 8px 20px;
+                font-size: 15px;
+                background-color: #1a5cff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #0d3fb0;
+            }
+            #result {
+                margin-top: 20px;
+                font-size: 17px;
+                color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Priyanshu Patil 25070521510</h2>
+        <h2>ATM Card PIN Verification</h2>
+        <h3>Enter your 6-digit PIN:</h3>
+        <input type='text' id='pin' maxlength="6"></input>
+        <button onClick="verifyPin()">Submit</button>
+        <p id='result'></p>
+
+        <script>
+            // FUNCTION DECLARATION
+            // Reverses the entered PIN
+            function reversePin(pin) {
+                return pin.split("").reverse().join("");
+            }
+
+            // FUNCTION EXPRESSION
+            // Checks whether the PIN is a palindrome (reads same forward and backward)
+            var isPalindrome = function(pin) {
+                var reversed = reversePin(pin);   // uses the function declared above
+                return pin === reversed;
+            };
+
+            // ARROW FUNCTION
+            // Displays the security message based on the result
+            var getMessage = (palindromeCheck) => {
+                if (palindromeCheck) {
+                    return "Security Alert: Your PIN is a palindrome!";
+                } else {
+                    return "PIN verified. No special security message.";
+                }
+            };
+
+            // MAIN FUNCTION (called on button click)
+           // MAIN FUNCTION (called on button click)
+function verifyPin() {
+    var pin = document.getElementById("pin").value; // local scope variable
+
+    if (pin == "" || pin.length !== 6 || isNaN(pin)) {
+        alert("Please enter a valid 6-digit PIN!");
+        return;
+    }
+
+    var reversed = reversePin(pin);
+    var palindromeCheck = isPalindrome(pin);
+    var message = getMessage(palindromeCheck);
+
+    // Alert user if the PIN is a palindrome
+    if (palindromeCheck) {
+        alert("⚠️ Security Alert!\nYour PIN is a palindrome.\nFor better security, please change your ATM PIN.");
+    }
+
+    document.getElementById("result").innerHTML =
+        "PIN entered = " + pin + "<br>" +
+        "Reversed PIN = " + reversed + "<br>" +
+        message;
+}
+        </script>
+    </body>
+</html>

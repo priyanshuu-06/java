@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Shopping - Bill Calculator</title>
+</head>
+<body>
+
+<h1>Online Shopping Store - Bill Calculator</h1>
+
+<form id="billForm">
+
+    <label for="custName">Customer Name</label><br>
+    <input type="text" id="custName" required><br><br>
+
+    <label for="mobile">Mobile Number</label><br>
+    <input type="tel" id="mobile" required><br><br>
+
+    <label for="invoice">Invoice Number</label><br>
+    <input type="text" id="invoice" required><br><br>
+
+    <label for="product">Product Name</label><br>
+    <input type="text" id="product" required><br><br>
+
+    <label for="quantity">Quantity (in Kg)</label><br>
+    <input type="number" id="quantity" step="0.1" required><br><br>
+
+    <label for="rate">Rate per Kg (Rs.)</label><br>
+    <input type="number" id="rate" step="0.01" required><br><br>
+
+    <label for="discount">Discount (%)</label><br>
+    <input type="number" id="discount" step="0.1" value="0"><br><br>
+
+    <label for="gst">GST (%)</label><br>
+    <input type="number" id="gst" step="0.1" value="0"><br><br>
+
+    <label for="packing">Packing Charges (Rs.)</label><br>
+    <input type="number" id="packing" step="0.01" value="0"><br><br>
+
+    <label for="payment">Payment Mode</label><br>
+    <select id="payment">
+        <option value="Cash">Cash</option>
+        <option value="Card">Card</option>
+        <option value="UPI">UPI</option>
+    </select><br><br>
+
+    <label for="membership">Membership</label><br>
+    <select id="membership">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+    </select><br><br>
+
+    <button type="button" onclick="calculateBill()">Calculate Bill</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+    // INTERNAL JS (inbuilt script inside the HTML file)
+
+    function calculateBill() {
+        // Reading input values - all inputs return strings, so we convert them
+        // using Number() to demonstrate type conversion
+        let custName = document.getElementById("custName").value;   // string
+        let mobile = document.getElementById("mobile").value;       // string
+        let invoice = document.getElementById("invoice").value;     // string
+        let product = document.getElementById("product").value;     // string
+
+        let quantity = Number(document.getElementById("quantity").value);   // number
+        let rate = Number(document.getElementById("rate").value);           // number
+        let discount = Number(document.getElementById("discount").value);   // number
+        let gst = Number(document.getElementById("gst").value);             // number
+        let packing = Number(document.getElementById("packing").value);     // number
+
+        let payment = document.getElementById("payment").value;      // string
+        let membership = document.getElementById("membership").value === "Yes"; // boolean
+
+        // Basic validation
+        if (!custName || !mobile || !invoice || !product || quantity <= 0 || rate <= 0) {
+            console.error("Validation failed: Please fill all required fields correctly.");
+            alert("Please fill all required fields with valid values.");
+            return;
+        }
+
+        // Calculation
+        const subtotal = quantity * rate;
+        const discountAmount = (subtotal * discount) / 100;
+        const afterDiscount = subtotal - discountAmount;
+        const gstAmount = (afterDiscount * gst) / 100;
+
+        // Extra membership discount (const used since this value won't change)
+        const membershipDiscount = membership ? afterDiscount * 0.05 : 0;
+
+        let totalBill = afterDiscount + gstAmount + packing - membershipDiscount;
+
+        console.log("----- Bill Calculation -----");
+        console.log("Customer: " + custName);
+        console.log("Subtotal: Rs. " + subtotal.toFixed(2));
+        console.log("Discount Amount: Rs. " + discountAmount.toFixed(2));
+        console.log("GST Amount: Rs. " + gstAmount.toFixed(2));
+        console.log("Membership Discount: Rs. " + membershipDiscount.toFixed(2));
+        console.log("Total Bill: Rs. " + totalBill.toFixed(2));
+
+        // Display result
+        document.getElementById("result").innerHTML =
+            "<hr>" +
+            "<p><strong>Customer:</strong> " + custName + " (" + mobile + ")</p>" +
+            "<p><strong>Invoice No:</strong> " + invoice + "</p>" +
+            "<p><strong>Product:</strong> " + product + " (" + quantity + " Kg)</p>" +
+            "<p><strong>Subtotal:</strong> Rs. " + subtotal.toFixed(2) + "</p>" +
+            "<p><strong>Discount:</strong> Rs. " + discountAmount.toFixed(2) + "</p>" +
+            "<p><strong>GST:</strong> Rs. " + gstAmount.toFixed(2) + "</p>" +
+            "<p><strong>Packing Charges:</strong> Rs. " + packing.toFixed(2) + "</p>" +
+            "<p><strong>Membership Discount:</strong> Rs. " + membershipDiscount.toFixed(2) + "</p>" +
+            "<p><strong>Payment Mode:</strong> " + payment + "</p>" +
+            "<p><strong>Total Bill: Rs. " + totalBill.toFixed(2) + "</strong></p>";
+    }
+</script>
+
+</body>
+</html>
