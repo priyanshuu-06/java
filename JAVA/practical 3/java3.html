@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Grade</title>
+</head>
+
+<body>
+
+    <h2>Student Grading System</h2>
+
+    <h3>Student Details</h3>
+    <p><b>Name:</b> Priyanshu Patil</p>
+    <p><b>PRN:</b> 25070521510</p>
+
+    <hr>
+
+    <label>Enter Marks:</label>
+    <input type="number" id="marks">
+
+    <button onclick="checkGrade()">Submit</button>
+
+    <p id="result"></p>
+
+    <script>
+
+        function checkGrade() {
+
+            let marks = document.getElementById("marks").value;
+
+            // Form Validation
+            if (marks == "") {
+                document.getElementById("result").innerHTML =
+                    "Please enter marks.";
+                return;
+            }
+
+            marks = Number(marks);
+
+            if (marks < 0 || marks > 100) {
+                document.getElementById("result").innerHTML =
+                    "Marks should be between 0 and 100.";
+                return;
+            }
+
+            let grade = "";
+
+            // Control Structure (if-else)
+            if (marks >= 90) {
+                grade = "A+";
+            }
+            else if (marks >= 80) {
+                grade = "A";
+            }
+            else if (marks >= 70) {
+                grade = "B";
+            }
+            else if (marks >= 60) {
+                grade = "C";
+            }
+            else if (marks >= 50) {
+                grade = "D";
+            }
+            else {
+                grade = "Fail";
+            }
+
+            document.getElementById("result").innerHTML =
+                "<b>Name:</b> Priyanshu Patil<br>" +
+                "<b>PRN:</b> 25070521510<br>" +
+                "<b>Marks:</b> " + marks + "<br>" +
+                "<b>Grade:</b> " + grade;
+        }
+
+    </script>
+
+</body>
+
+</html>

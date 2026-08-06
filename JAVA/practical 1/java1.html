@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>Billing Calculator</title>
+ </head>
+ <body>
+ <h2>Billing Calculator</h2>
+ <script>
+ // const example
+ const GST = 0.18;
+ //user Input
+ var customerName = prompt("Enter Customer Name:");
+ var productName = prompt("Enter Product Name:");
+ // var example
+ var quantity = Number(prompt("Enter Quantity:"));
+ let price = Number(prompt("Enter Price per Item:"));
+ //Calculations
+ let total = quantity * price;
+
+ let gstAmount = total * GST;
+ let finalBill = total + gstAmount;
+ //Object
+ const bill = {
+ customer: customerName,
+ product: productName,
+ quantity,
+ price,
+ total,
+ gstAmount,
+ finalBill
+ };
+ //Destructuring
+ const {
+ customer,
+ product,
+ gstAmount: gst,
+ finalBill: amountz
+ } = bill;
+ //Output using Template Literals
+ document.write(`<h3>Billing Receipt</h3>`);
+ document.write(`<p>Customer: ${customer}</p>`);
+ document.write(`<p>product: ${product}</p>`);
+ document.write(`<p>Quantity: ${quantity}</p>`);
+ document.write(`<p>Price per Item: ₹${price}</p>`);
+ document.write(`<p>GST (18%): ₹${gst.toFixed(2)}</p>`);
+ document.write(`<p>Final Bill: ₹${amount.toFixed(2)}</p>`);
+
+
+ </script>
+ </body>
+</html>
