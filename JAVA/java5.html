@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Discount Calculator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #333;
+  }
+  .row {
+    margin-bottom: 10px;
+  }
+  label {
+    display: inline-block;
+    width: 90px;
+  }
+  select, input {
+    width: 140px;
+    padding: 6px;
+    margin-right: 8px;
+  }
+  button {
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .cart-list {
+    margin-top: 12px;
+    max-width: 420px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .cart-list th,
+  .cart-list td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+  }
+  .summary-card {
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 6px;
+    background: #fafafa;
+    max-width: 420px;
+    margin-top: 12px;
+  }
+  .summary-card p {
+    margin: 6px 0;
+  }
+  .error {
+    color: #c00;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<h1>Priyanshu Patil - 25070521510</h1>
+<div class="row">
+  <label for="item">Item:</label>
+  <select id="item">
+    <option value="pen">Pen - 150</option>
+    <option value="pencil">Pencil - 120</option>
+    <option value="notebook">Notebook - 800</option>
+    <option value="eraser">Eraser - 100</option>
+    <option value="marker">Marker - 250</option>
+  </select>
+</div>
+<div class="row">
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" placeholder="1" min="1" value="1" />
+  <button onclick="addItem()">Add Item</button>
+</div>
+<div class="row">
+  <button onclick="applyDiscount()">Calculate Total</button>
+</div>
+<div id="cartSection"></div>
+<div class="results" id="results"></div>
+
+<script>
+const prices = {
+  pen: 150,
+  pencil: 120,
+  notebook: 800,
+  eraser: 100,
+  marker: 250,
+};
+const itemNames = {
+  pen: 'Pen',
+  pencil: 'Pencil',
+  notebook: 'Notebook',
+  eraser: 'Eraser',
+  marker: 'Marker',
+};
+const cartItems = [];
+
+function addItem() {
+  const itemSelect = document.getElementById('item');
+  const quantityInput = document.getElementById('quantity');
+  const cartSection = document.getElementById('cartSection');
+  const itemKey = itemSelect.value;
+  const quantity = parseInt(quantityInput.value, 10);
+
+  if (isNaN(quantity) || quantity < 1) {
+    cartSection.innerHTML = '<p class="error">Enter a valid quantity.</p>';
+    return;
+  }
+
+  cartItems.push({
+    name: itemNames[itemKey],
+    quantity,
+    price: prices[itemKey],
+  });
+  quantityInput.value = '1';
+  cartSection.innerHTML = generateCartHtml();
+  document.getElementById('results').innerHTML = '';
+}
+
+function generateCartHtml() {
+  if (!cartItems.length) {
+    return '<p>No items added yet.</p>';
+  }
+
+  let html = '<table class="cart-list"><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>';
+  cartItems.forEach(item => {
+    const subtotal = item.quantity * item.price;
+    html += `<tr><td>${item.name}</td><td>${item.quantity}</td><td>${item.price}</td><td>${subtotal}</td></tr>`;
+  });
+  html += '</table>';
+  html += `<p><strong>Total items:</strong> ${cartItems.length}</p>`;
+  return html;
+}
+
+function getCartTotal() {
+  return cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+}
+
+function getAutoDiscount(amount) {
+  if (amount >= 2000) return 20;
+  if (amount >= 1000) return 10;
+  return 0;
+}
+
+function applyDiscount() {
+  const resultsDiv = document.getElementById('results');
+  const total = getCartTotal();
+
+  if (total <= 0) {
+    resultsDiv.innerHTML = '<p class="error">Add at least one item first.</p>';
+    return;
+  }
+
+  const discountPercentage = getAutoDiscount(total);
+  const discountAmount = (total * discountPercentage) / 100;
+  const finalAmount = total - discountAmount;
+
+  resultsDiv.innerHTML = `
+    <div class="summary-card">
+      <p>Total bill: ${total.toFixed(2)}</p>
+      <p>Discount: <strong>${discountPercentage}%</strong></p>
+      <p>Discount amount: ${discountAmount.toFixed(2)}</p>
+      <p><strong>Final amount: ${finalAmount.toFixed(2)}</strong></p>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
