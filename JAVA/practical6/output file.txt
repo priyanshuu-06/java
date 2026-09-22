@@ -1,0 +1,14 @@
+﻿Valid Email: true
+Extracted Emails: [ 'admin@example.com', 'support@gmail.com' ]
+Uppercase: CONTACT US AT ADMIN@EXAMPLE.COM OR SUPPORT@GMAIL.COM. WELCOME TO OUR WEBSITE!
+Lowercase: contact us at admin@example.com or support@gmail.com. welcome to our website!
+Contains 'Welcome': true
+Text Length: 77
+Number of Words: 10
+Occurrences of 'email': 0
+Replaced Text: Contact us at admin@example.com or help@company.org. Welcome to our website!
+Masked Emails: Contact us at a***@example.com or s***@gmail.com. Welcome to our website!
+Domain Counts: { 'example.com': 1, 'gmail.com': 1 }
+Longest Word: support@gmail.com.
+Average Word Length: 6.8
+Sample Phones: [ '+1-800-555-1234', '(555) 123-4567' ]

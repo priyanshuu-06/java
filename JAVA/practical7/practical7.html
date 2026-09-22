@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="todo-container">
+        <!-- Header Info -->
+        <header>
+            <h1>To-Do List</h1>
+            <p class="subtitle">Organize your Tasks. Stay productive.</p>
+            <div class="meta-info">
+                <span class="badge">Name: Priyanshu Patil</span>
+                <span class="badge">Prn:25070521510</span>
+            </div>
+        </header>
+
+        <!-- Input Bar -->
+        <div class="input-section">
+            <input type="text" id="task-input" placeholder="What needs to be done?">
+            <button class="add-btn" id="add-task-btn">+ Add Task</button>
+        </div>
+
+        <!-- Metric Counter Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-num" id="total-tasks">6</span>
+                <span class="stat-label">Total Tasks</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-num" id="completed-tasks">3</span>
+                <span class="stat-label">Completed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-num" id="remaining-tasks">3</span>
+                <span class="stat-label">Remaining</span>
+            </div>
+        </div>
+
+        <!-- Task Output Display Card -->
+        <div class="tasks-card">
+            <div class="tasks-header">
+                <h2>Tasks</h2>
+                <button class="clear-all-btn" id="clear-all-btn">Clear All</button>
+            </div>
+            <ul class="task-list" id="task-list">
+                <!-- Items are populated dynamically by script.js -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

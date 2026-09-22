@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join Our Gym - Registration</title>
+<!-- Google Fonts for a stylish look -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: #fff;
+    padding: 30px; /* Reduced padding for smaller size */
+    max-width: 450px; /* Slightly smaller width */
+    width: 90%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #555;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px 12px; /* Slightly smaller padding */
+    margin-bottom: 15px; /* Slightly less space */
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.9em;
+    transition: border-color 0.3s;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    border-color: #6a11cb;
+    outline: none;
+  }
+  button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button.submit {
+    background-color: #6a11cb;
+    color: #fff;
+  }
+  button.submit:hover {
+    background-color: #5a0fb1;
+  }
+  button.reset {
+    background-color: #e91e63;
+    color: #fff;
+  }
+  button.reset:hover {
+    background-color: #d0144f;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  .confirmation {
+    text-align: center;
+    margin-top: 20px;
+    color: #2e7d32;
+    font-weight: 600;
+    font-size: 1em;
+  }
+  #membershipDetails {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    display: none;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>Register for Gym Membership</h2>
+  <form id="gymForm" novalidate>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" placeholder="e.g., John Doe" required />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="e.g., 1234567890" pattern="[0-9]{10,15}" required />
+
+    <label for="age">Age</label>
+    <input type="number" id="age" name="age" placeholder="e.g., 25" min="10" max="100" required />
+
+    <label for="membership">Membership Plan</label>
+    <select id="membership" name="membership" required>
+      <option value="">Select Membership</option>
+      <option value="Monthly">Monthly</option>
+      <option value="Quarterly">Quarterly</option>
+      <option value="Yearly">Yearly</option>
+    </select>
+
+    <!-- Area to display plan details -->
+    <div id="membershipDetails"></div>
+
+    <label for="gender">Gender</label>
+    <select id="gender" name="gender" required>
+      <option value="">Select your gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <div class="buttons">
+      <button type="submit" class="submit">Join Now</button>
+      <button type="reset" class="reset">Clear</button>
+    </div>
+    <div class="confirmation" id="msg"></div>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('gymForm');
+  const msgDiv = document.getElementById('msg');
+  const membershipSelect = document.getElementById('membership');
+  const membershipDetailsDiv = document.getElementById('membershipDetails');
+
+  const planDetails = {
+    "Monthly": "Price: 1500₹/month<br>Includes unlimited access for 1 month.",
+    "Quarterly": "Price: 5000₹/quarter<br>Includes unlimited access for 3 months.",
+    "Yearly": "Price: 12000₹/year<br>Includes unlimited access for 12 months."
+  };
+
+  membershipSelect.addEventListener('change', () => {
+    const selectedPlan = membershipSelect.value;
+    if (planDetails[selectedPlan]) {
+      membershipDetailsDiv.innerHTML = planDetails[selectedPlan];
+      membershipDetailsDiv.style.display = 'block';
+    } else {
+      membershipDetailsDiv.style.display = 'none';
+    }
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    msgDiv.innerHTML = "Thanks for registering! Welcome to our gym!";
+    setTimeout(() => {
+      form.reset();
+      membershipDetailsDiv.style.display = 'none';
+      msgDiv.innerHTML = "";
+    }, 3000);
+  });
+</script>
+</body>
+</html>
