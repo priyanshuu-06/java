@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Information - JSON</title>
+
+
+    <!-- jQuery CDN -->
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js">
+    </script>
+
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f6fb;
+            margin: 0;
+            padding: 40px;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+
+            background-color: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.1);
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #1a5cff;
+            margin-bottom: 5px;
+        }
+
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+
+        .buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+
+        button {
+            padding: 11px 18px;
+
+            margin: 5px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background-color: #1a5cff;
+
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+            background-color: #0d3fb0;
+        }
+
+
+        #status {
+            text-align: center;
+
+            color: #555;
+
+            margin: 15px;
+        }
+
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+        }
+
+
+        th {
+            background-color: #1a5cff;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+
+        td {
+            padding: 11px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        tr:hover {
+            background-color: #f1f5ff;
+        }
+
+
+        .number {
+            text-align: center;
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>Student Information</h1>
+
+
+    <p class="subtitle">
+        Loading and displaying JSON data
+    </p>
+
+
+    <!-- Buttons -->
+
+    <div class="buttons">
+
+        <button onclick="loadUsingFetch()">
+            Load using fetch()
+        </button>
+
+
+        <button onclick="loadUsingJQuery()">
+            Load using $.getJSON()
+        </button>
+
+    </div>
+
+
+    <p id="status">
+        Click a button to display student data.
+    </p>
+
+
+    <!-- Table -->
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th class="number">
+                    No.
+                </th>
+
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Student ID
+                </th>
+
+                <th>
+                    Email
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody id="studentBody">
+
+        </tbody>
+
+    </table>
+
+
+</div>
+
+
+
+<script>
+
+
+// =====================================================
+// JSON DATA
+// =====================================================
+
+var jsonData = `
+
+[
+    {
+        "name": "Sanvi Wadhankar",
+        "id": "24070521191",
+        "email": "sanvi@example.com"
+    },
+
+    {
+        "name": "Aarav Sharma",
+        "id": "24070521192",
+        "email": "aarav@example.com"
+    },
+
+    {
+        "name": "Priya Patil",
+        "id": "24070521193",
+        "email": "priya@example.com"
+    },
+
+    {
+        "name": "Rohan Joshi",
+        "id": "24070521194",
+        "email": "rohan@example.com"
+    },
+
+    {
+        "name": "Ananya Deshmukh",
+        "id": "24070521195",
+        "email": "ananya@example.com"
+    }
+]
+
+`;
+
+
+
+// =====================================================
+// DISPLAY STUDENTS
+// =====================================================
+
+function displayStudents(students) {
+
+
+    var tableBody =
+        document.getElementById(
+            "studentBody"
+        );
+
+
+    // Clear previous rows
+
+    tableBody.innerHTML = "";
+
+
+    // Process every student
+
+    students.forEach(
+        function(student, index) {
+
+
+            // Create table row
+
+            var row =
+                document.createElement("tr");
+
+
+            // Number
+
+            var numberCell =
+                document.createElement("td");
+
+            numberCell.className =
+                "number";
+
+            numberCell.innerText =
+                index + 1;
+
+
+            // Name
+
+            var nameCell =
+                document.createElement("td");
+
+            nameCell.innerText =
+                student.name;
+
+
+            // ID
+
+            var idCell =
+                document.createElement("td");
+
+            idCell.innerText =
+                student.id;
+
+
+            // Email
+
+            var emailCell =
+                document.createElement("td");
+
+            emailCell.innerText =
+                student.email;
+
+
+            // Add cells to row
+
+            row.appendChild(
+                numberCell
+            );
+
+            row.appendChild(
+                nameCell
+            );
+
+            row.appendChild(
+                idCell
+            );
+
+            row.appendChild(
+                emailCell
+            );
+
+
+            // Add row to table
+
+            tableBody.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+
+// =====================================================
+// FETCH()
+// =====================================================
+
+function loadUsingFetch() {
+
+
+    document.getElementById(
+        "status"
+    ).innerText =
+        "Loading data using fetch()...";
+
+
+    /*
+        Convert JSON string into
+        a JavaScript object.
+
+        This simulates receiving
+        JSON data from a server.
+    */
+
+    var response =
+        Promise.resolve(
+            new Response(jsonData)
+        );
+
+
+    response
+
+        .then(
+            function(response) {
+
+                return response.json();
+
+            }
+        )
+
+
+        .then(
+            function(data) {
+
+                displayStudents(data);
+
+
+                document.getElementById(
+                    "status"
+                ).innerText =
+                    "Student data loaded using fetch()";
+
+            }
+        );
+
+
+}
+
+
+
+// =====================================================
+// jQuery $.getJSON()
+// =====================================================
+
+function loadUsingJQuery() {
+
+
+    document.getElementById(
+        "status"
+    ).innerText =
+        "Loading data using jQuery $.getJSON()...";
+
+
+    /*
+        Since we are running the HTML
+        directly from the browser, there
+        is no external JSON file.
+
+        We create a temporary data URL
+        containing our JSON data.
+    */
+
+    var dataURL =
+        "data:application/json," +
+        encodeURIComponent(jsonData);
+
+
+    $.getJSON(
+
+        dataURL,
+
+        function(data) {
+
+
+            // Process every JSON record
+
+            $.each(
+
+                data,
+
+                function(index, student) {
+
+                    console.log(
+                        "Name:",
+                        student.name
+                    );
+
+                    console.log(
+                        "ID:",
+                        student.id
+                    );
+
+                    console.log(
+                        "Email:",
+                        student.email
+                    );
+
+                }
+
+            );
+
+
+            // Display data
+
+            displayStudents(data);
+
+
+            document.getElementById(
+                "status"
+            ).innerText =
+                "Student data loaded using $.getJSON()";
+
+        }
+
+    );
+
+
+}
+
+</script>
+
+
+</body>
+
+</html>
