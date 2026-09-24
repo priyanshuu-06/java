@@ -1,0 +1,582 @@
+<html>
+    <head>
+        <title>Job Application Form</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                font-family: 'Segoe UI', Arial, sans-serif;
+                background: linear-gradient(135deg, #eef3ff, #dbe7ff);
+                padding: 40px 15px;
+                margin: 0;
+            }
+            .container {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 25px;
+            }
+            .header h2 {
+                color: #1a5cff;
+                margin-bottom: 5px;
+            }
+            .header p {
+                color: #666;
+                font-size: 14px;
+            }
+            form {
+                background-color: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            }
+            .section {
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid #eee;
+            }
+            .section:last-of-type {
+                border-bottom: none;
+            }
+            .section h3 {
+                color: #1a5cff;
+                font-size: 17px;
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            .full-width {
+                grid-column: 1 / -1;
+            }
+            .field {
+                display: flex;
+                flex-direction: column;
+            }
+            label {
+                font-size: 13px;
+                color: #444;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+            input, select {
+                padding: 9px 10px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.2s;
+            }
+            input:focus, select:focus {
+                border-color: #1a5cff;
+            }
+            .error {
+                color: #e63946;
+                font-size: 12px;
+                margin-top: 4px;
+                min-height: 14px;
+            }
+            button {
+                margin-top: 10px;
+                width: 100%;
+                padding: 12px;
+                background-color: #1a5cff;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+            button:hover {
+                background-color: #0d3fb0;
+            }
+            #successMsg {
+                text-align: center;
+                color: #2a9d3f;
+                margin-top: 15px;
+                font-size: 15px;
+                font-weight: 600;
+            }
+            @media (max-width: 600px) {
+                .grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="container">
+
+        <div class="header">
+            <h2>Online Job Application Form</h2>
+            <p>Sanvi Wadhankar 24070521191</p>
+            <p>Fill in your details below. All fields are checked as you type.</p>
+        </div>
+
+        <form id="jobForm">
+
+            <div class="section">
+                <h3>Personal Info</h3>
+                <div class="grid">
+
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input type="text" id="name">
+                        <span class="error" id="nameError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="text" id="email">
+                        <span class="error" id="emailError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="dob">Birth Date</label>
+                        <input type="date" id="dob">
+                        <span class="error" id="dobError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="gender">Gender</label>
+                        <select id="gender">
+                            <option value="">-- Select --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="error" id="genderError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" maxlength="10">
+                        <span class="error" id="phoneError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="pincode">Pin Code</label>
+                        <input type="text" id="pincode" maxlength="6">
+                        <span class="error" id="pincodeError"></span>
+                    </div>
+
+                    <div class="field full-width">
+                        <label for="address">Address</label>
+                        <input type="text" id="address">
+                        <span class="error" id="addressError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="city">City</label>
+                        <input type="text" id="city">
+                        <span class="error" id="cityError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="state">State</label>
+                        <input type="text" id="state">
+                        <span class="error" id="stateError"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Educational Qualification</h3>
+                <div class="grid">
+
+                    <div class="field">
+                        <label for="qualification">Highest Qualification</label>
+                        <input type="text" id="qualification">
+                        <span class="error" id="qualificationError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="institute">University / Institute</label>
+                        <input type="text" id="institute">
+                        <span class="error" id="instituteError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="passingYear">Passing Year</label>
+                        <input type="text" id="passingYear" maxlength="4">
+                        <span class="error" id="passingYearError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="cgpa">CGPA (out of 10)</label>
+                        <input type="text" id="cgpa">
+                        <span class="error" id="cgpaError"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Professional Info</h3>
+                <div class="grid">
+
+                    <div class="field">
+                        <label for="jobPosition">Applying For / Job Position</label>
+                        <input type="text" id="jobPosition">
+                        <span class="error" id="jobPositionError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="experience">Total Work Experience (Years)</label>
+                        <input type="text" id="experience">
+                        <span class="error" id="experienceError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="organization">Current / Previous Organization</label>
+                        <input type="text" id="organization">
+                        <span class="error" id="organizationError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="designation">Current Designation</label>
+                        <input type="text" id="designation">
+                        <span class="error" id="designationError"></span>
+                    </div>
+
+                    <div class="field full-width">
+                        <label for="salary">Expected Salary</label>
+                        <input type="text" id="salary">
+                        <span class="error" id="salaryError"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Technical Skills</h3>
+                <div class="grid">
+
+                    <div class="field">
+                        <label for="languages">Programming Languages</label>
+                        <input type="text" id="languages">
+                        <span class="error" id="languagesError"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="skills">Technical Skills</label>
+                        <input type="text" id="skills">
+                        <span class="error" id="skillsError"></span>
+                    </div>
+
+                    <div class="field full-width">
+                        <label for="certifications">Certifications</label>
+                        <input type="text" id="certifications">
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="button" onclick="submitForm()">Submit Application</button>
+
+            <p id="successMsg"></p>
+
+        </form>
+
+    </div>
+
+        <script>
+            // ---------- FIELD REFERENCES ----------
+            var nameField = document.getElementById("name");
+            var emailField = document.getElementById("email");
+            var dobField = document.getElementById("dob");
+            var genderField = document.getElementById("gender");
+            var addressField = document.getElementById("address");
+            var phoneField = document.getElementById("phone");
+            var pincodeField = document.getElementById("pincode");
+            var cityField = document.getElementById("city");
+            var stateField = document.getElementById("state");
+
+            var qualificationField = document.getElementById("qualification");
+            var instituteField = document.getElementById("institute");
+            var passingYearField = document.getElementById("passingYear");
+            var cgpaField = document.getElementById("cgpa");
+
+            var jobPositionField = document.getElementById("jobPosition");
+            var experienceField = document.getElementById("experience");
+            var organizationField = document.getElementById("organization");
+            var designationField = document.getElementById("designation");
+            var salaryField = document.getElementById("salary");
+
+            var languagesField = document.getElementById("languages");
+            var skillsField = document.getElementById("skills");
+
+            // ---------- VALIDATION FUNCTIONS ----------
+
+            function validateName() {
+                if (nameField.value.trim() === "") {
+                    document.getElementById("nameError").innerHTML = "Name is required";
+                    return false;
+                }
+                document.getElementById("nameError").innerHTML = "";
+                return true;
+            }
+
+            function validateEmail() {
+                var pattern = /^[^\s@]+@[^\s@]+\.com$/;
+                if (!pattern.test(emailField.value)) {
+                    document.getElementById("emailError").innerHTML = "Enter a valid email";
+                    return false;
+                }
+                document.getElementById("emailError").innerHTML = "";
+                return true;
+            }
+
+            function validateDob() {
+                if (dobField.value === "") {
+                    document.getElementById("dobError").innerHTML = "Birth date is required";
+                    return false;
+                }
+                var dob = new Date(dobField.value);
+                var today = new Date();
+                var age = today.getFullYear() - dob.getFullYear();
+                var monthDiff = today.getMonth() - dob.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                if (age < 18) {
+                    document.getElementById("dobError").innerHTML = "Applicant must be at least 18 years old";
+                    return false;
+                }
+                document.getElementById("dobError").innerHTML = "";
+                return true;
+            }
+
+            function validateGender() {
+                if (genderField.value === "") {
+                    document.getElementById("genderError").innerHTML = "Please select gender";
+                    return false;
+                }
+                document.getElementById("genderError").innerHTML = "";
+                return true;
+            }
+
+            function validateAddress() {
+                if (addressField.value.trim() === "") {
+                    document.getElementById("addressError").innerHTML = "Address is required";
+                    return false;
+                }
+                document.getElementById("addressError").innerHTML = "";
+                return true;
+            }
+
+            function validatePhone() {
+                var pattern = /^[0-9]{10}$/;
+                if (!pattern.test(phoneField.value)) {
+                    document.getElementById("phoneError").innerHTML = "Enter valid 10 digit number";
+                    return false;
+                }
+                document.getElementById("phoneError").innerHTML = "";
+                return true;
+            }
+
+            function validatePincode() {
+                var pattern = /^[0-9]{6}$/;
+                if (!pattern.test(pincodeField.value)) {
+                    document.getElementById("pincodeError").innerHTML = "Enter valid 6 digit pin code";
+                    return false;
+                }
+                document.getElementById("pincodeError").innerHTML = "";
+                return true;
+            }
+
+            function validateCity() {
+                if (cityField.value.trim() === "") {
+                    document.getElementById("cityError").innerHTML = "City is required";
+                    return false;
+                }
+                document.getElementById("cityError").innerHTML = "";
+                return true;
+            }
+
+            function validateState() {
+                if (stateField.value.trim() === "") {
+                    document.getElementById("stateError").innerHTML = "State is required";
+                    return false;
+                }
+                document.getElementById("stateError").innerHTML = "";
+                return true;
+            }
+
+            function validateQualification() {
+                if (qualificationField.value.trim() === "") {
+                    document.getElementById("qualificationError").innerHTML = "Qualification is required";
+                    return false;
+                }
+                document.getElementById("qualificationError").innerHTML = "";
+                return true;
+            }
+
+            function validateInstitute() {
+                if (instituteField.value.trim() === "") {
+                    document.getElementById("instituteError").innerHTML = "Institute name is required";
+                    return false;
+                }
+                document.getElementById("instituteError").innerHTML = "";
+                return true;
+            }
+
+            function validatePassingYear() {
+                var year = Number(passingYearField.value);
+                var currentYear = new Date().getFullYear();
+                // Allows past years (already graduated) and up to 5 years ahead (expected graduation)
+                if (!/^[0-9]{4}$/.test(passingYearField.value) || year < 1950 || year > currentYear + 5) {
+                    document.getElementById("passingYearError").innerHTML = "Enter a valid passing year";
+                    return false;
+                }
+                document.getElementById("passingYearError").innerHTML = "";
+                return true;
+            }
+
+            function validateCgpa() {
+                var value = Number(cgpaField.value);
+                if (cgpaField.value.trim() === "" || isNaN(value) || value < 0 || value > 10) {
+                    document.getElementById("cgpaError").innerHTML = "Enter valid CGPA (0-10)";
+                    return false;
+                }
+                document.getElementById("cgpaError").innerHTML = "";
+                return true;
+            }
+
+            function validateJobPosition() {
+                if (jobPositionField.value.trim() === "") {
+                    document.getElementById("jobPositionError").innerHTML = "Job position is required";
+                    return false;
+                }
+                document.getElementById("jobPositionError").innerHTML = "";
+                return true;
+            }
+
+            function validateExperience() {
+                var value = Number(experienceField.value);
+                if (experienceField.value.trim() === "" || isNaN(value) || value < 0 || value > 50) {
+                    document.getElementById("experienceError").innerHTML = "Enter valid years of experience";
+                    return false;
+                }
+                document.getElementById("experienceError").innerHTML = "";
+                return true;
+            }
+
+            function validateOrganization() {
+                document.getElementById("organizationError").innerHTML = "";
+                return true;
+            }
+
+            function validateDesignation() {
+                document.getElementById("designationError").innerHTML = "";
+                return true;
+            }
+
+            function validateSalary() {
+                var value = Number(salaryField.value);
+                if (salaryField.value.trim() === "" || isNaN(value) || value <= 0) {
+                    document.getElementById("salaryError").innerHTML = "Enter valid expected salary";
+                    return false;
+                }
+                document.getElementById("salaryError").innerHTML = "";
+                return true;
+            }
+
+            function validateLanguages() {
+                if (languagesField.value.trim() === "") {
+                    document.getElementById("languagesError").innerHTML = "Enter at least one programming language";
+                    return false;
+                }
+                document.getElementById("languagesError").innerHTML = "";
+                return true;
+            }
+
+            function validateSkills() {
+                if (skillsField.value.trim() === "") {
+                    document.getElementById("skillsError").innerHTML = "Enter at least one technical skill";
+                    return false;
+                }
+                document.getElementById("skillsError").innerHTML = "";
+                return true;
+            }
+
+            // ---------- LIVE VALIDATION USING EVENTS ----------
+
+            nameField.addEventListener("input", validateName);
+            emailField.addEventListener("input", validateEmail);
+            dobField.addEventListener("change", validateDob);
+            genderField.addEventListener("change", validateGender);
+            addressField.addEventListener("input", validateAddress);
+            phoneField.addEventListener("input", validatePhone);
+            pincodeField.addEventListener("input", validatePincode);
+            cityField.addEventListener("input", validateCity);
+            stateField.addEventListener("input", validateState);
+
+            qualificationField.addEventListener("input", validateQualification);
+            instituteField.addEventListener("input", validateInstitute);
+            passingYearField.addEventListener("input", validatePassingYear);
+            cgpaField.addEventListener("input", validateCgpa);
+
+            jobPositionField.addEventListener("input", validateJobPosition);
+            experienceField.addEventListener("input", validateExperience);
+            organizationField.addEventListener("input", validateOrganization);
+            designationField.addEventListener("input", validateDesignation);
+            salaryField.addEventListener("input", validateSalary);
+
+            languagesField.addEventListener("input", validateLanguages);
+            skillsField.addEventListener("input", validateSkills);
+
+            // ---------- FORM SUBMISSION ----------
+
+            function submitForm() {
+                var results = [
+                    validateName(),
+                    validateEmail(),
+                    validateDob(),
+                    validateGender(),
+                    validateAddress(),
+                    validatePhone(),
+                    validatePincode(),
+                    validateCity(),
+                    validateState(),
+                    validateQualification(),
+                    validateInstitute(),
+                    validatePassingYear(),
+                    validateCgpa(),
+                    validateJobPosition(),
+                    validateExperience(),
+                    validateOrganization(),
+                    validateDesignation(),
+                    validateSalary(),
+                    validateLanguages(),
+                    validateSkills()
+                ];
+
+                var allValid = results.every(function (result) {
+                    return result === true;
+                });
+
+                if (allValid) {
+                    document.getElementById("successMsg").innerHTML =
+                        "Application submitted successfully! Thank you, " + nameField.value + ".";
+                } else {
+                    document.getElementById("successMsg").innerHTML = "";
+                    alert("Invalid data! Please correct the highlighted fields before submitting.");
+                }
+            }
+        </script>
+
+    </body>
+</html>

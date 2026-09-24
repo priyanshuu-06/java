@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Clinic Receptionist Task Manager</title>
+    
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f6fb;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        /* Heading */
+
+        h1 {
+            text-align: center;
+            color: #1a5cff;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+
+        /* Form */
+
+        .form-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .form-box h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1a5cff;
+            box-shadow: 0 0 4px rgba(26,92,255,0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .error {
+            color: #e53935;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .success {
+            color: #2e7d32;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+
+        /* Add Task Button */
+
+        .add-btn {
+            margin-top: 20px;
+            padding: 11px 20px;
+            background-color: #1a5cff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background-color: #0d3fb0;
+        }
+
+
+        /* Tasks */
+
+        .tasks-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .tasks-box h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        #taskList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background-color: #f8fafc;
+
+            border: 1px solid #e0e4ea;
+
+            border-radius: 9px;
+
+            padding: 14px;
+
+            margin-top: 10px;
+
+            transition: 0.2s;
+        }
+
+        .task:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .task-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: #263238;
+        }
+
+        .task-details {
+            font-size: 13px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .task button {
+            border: none;
+            padding: 7px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .edit-btn {
+            background-color: #f59e0b;
+        }
+
+        .edit-btn:hover {
+            background-color: #d97706;
+        }
+
+        .delete-btn {
+            background-color: #ef4444;
+        }
+
+        .delete-btn:hover {
+            background-color: #dc2626;
+        }
+
+        .complete-checkbox {
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        #taskCount {
+            margin-top: 20px;
+            color: #555;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>Clinic Receptionist Task Manager</h1>
+    <h3>Sanvi Wadhankar 24070521191</h3>
+
+    <p class="subtitle">
+        Manage daily clinic tasks efficiently
+    </p>
+
+
+    <!-- =================================
+         FORM
+    ================================== -->
+
+    <div class="form-box">
+
+        <h2>Add New Task</h2>
+
+
+        <form id="taskForm">
+
+
+            <!-- Task Name -->
+
+            <label for="taskName">
+                Task Name
+            </label>
+
+            <input
+                type="text"
+                id="taskName"
+                placeholder="Example: Call patient"
+            >
+
+            <div
+                id="taskError"
+                class="error">
+            </div>
+
+
+            <!-- Priority -->
+
+            <label for="priority">
+                Priority
+            </label>
+
+            <select id="priority">
+
+                <option value="">
+                    Select Priority
+                </option>
+
+                <option value="High">
+                    High
+                </option>
+
+                <option value="Medium">
+                    Medium
+                </option>
+
+                <option value="Low">
+                    Low
+                </option>
+
+            </select>
+
+            <div
+                id="priorityError"
+                class="error">
+            </div>
+
+
+            <!-- Date -->
+
+            <label for="taskDate">
+                Due Date
+            </label>
+
+            <input
+                type="date"
+                id="taskDate"
+            >
+
+            <div
+                id="dateError"
+                class="error">
+            </div>
+
+
+            <!-- Description -->
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Enter task details">
+            </textarea>
+
+
+            <button
+                type="submit"
+                class="add-btn">
+
+                Add Task
+
+            </button>
+
+
+            <div
+                id="successMessage"
+                class="success">
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =================================
+         TASK LIST
+    ================================== -->
+
+    <div class="tasks-box">
+
+        <h2>Today's Tasks</h2>
+
+        <ul id="taskList"></ul>
+
+        <p id="taskCount">
+            Total Tasks: 0
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+// =========================================
+// ACCESS FORM ELEMENTS USING DOM
+// =========================================
+
+var form =
+    document.getElementById("taskForm");
+
+var taskName =
+    document.getElementById("taskName");
+
+var priority =
+    document.getElementById("priority");
+
+var taskDate =
+    document.getElementById("taskDate");
+
+var description =
+    document.getElementById("description");
+
+var taskList =
+    document.getElementById("taskList");
+
+var taskCount =
+    document.getElementById("taskCount");
+
+
+
+// =========================================
+// FORM SUBMIT EVENT
+// =========================================
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        // Prevent page reload
+        event.preventDefault();
+
+
+        // Validate form
+        if (!validateForm()) {
+
+            return;
+
+        }
+
+
+        // Create task
+        createTask();
+
+
+        // Clear form
+        form.reset();
+
+
+        document.getElementById(
+            "successMessage"
+        ).innerText =
+            "Task added successfully!";
+
+
+        // Remove success message
+        setTimeout(
+            function() {
+
+                document.getElementById(
+                    "successMessage"
+                ).innerText = "";
+
+            },
+            2000
+        );
+
+    }
+);
+
+
+
+// =========================================
+// FORM VALIDATION
+// =========================================
+
+function validateForm() {
+
+
+    var valid = true;
+
+
+    // Clear previous errors
+
+    document.getElementById(
+        "taskError"
+    ).innerText = "";
+
+    document.getElementById(
+        "priorityError"
+    ).innerText = "";
+
+    document.getElementById(
+        "dateError"
+    ).innerText = "";
+
+
+
+    // Validate Task Name
+
+    if (taskName.value.trim() === "") {
+
+        document.getElementById(
+            "taskError"
+        ).innerText =
+            "Please enter a task name.";
+
+        valid = false;
+
+    }
+
+
+    // Validate Priority
+
+    if (priority.value === "") {
+
+        document.getElementById(
+            "priorityError"
+        ).innerText =
+            "Please select a priority.";
+
+        valid = false;
+
+    }
+
+
+    // Validate Date
+
+    if (taskDate.value === "") {
+
+        document.getElementById(
+            "dateError"
+        ).innerText =
+            "Please select a due date.";
+
+        valid = false;
+
+    }
+
+
+    return valid;
+
+}
+
+
+
+// =========================================
+// CREATE TASK USING DOM
+// =========================================
+
+function createTask() {
+
+
+    // Create list item
+
+    var li =
+        document.createElement("li");
+
+    li.className =
+        "task";
+
+
+    // Create checkbox
+
+    var checkbox =
+        document.createElement("input");
+
+    checkbox.type =
+        "checkbox";
+
+    checkbox.className =
+        "complete-checkbox";
+
+
+
+    // Create task text container
+
+    var textContainer =
+        document.createElement("div");
+
+    textContainer.className =
+        "task-text";
+
+
+
+    // Create task title
+
+    var title =
+        document.createElement("div");
+
+    title.className =
+        "task-title";
+
+    title.innerText =
+        taskName.value;
+
+
+
+    // Create task details
+
+    var details =
+        document.createElement("div");
+
+    details.className =
+        "task-details";
+
+    details.innerText =
+        "Priority: " +
+        priority.value +
+        " | Due: " +
+        taskDate.value +
+        " | " +
+        description.value;
+
+
+
+    // Add title and details
+
+    textContainer.appendChild(title);
+
+    textContainer.appendChild(details);
+
+
+
+    // =====================================
+    // EDIT BUTTON
+    // =====================================
+
+    var editButton =
+        document.createElement("button");
+
+    editButton.innerText =
+        "Edit";
+
+    editButton.className =
+        "edit-btn";
+
+
+    editButton.onclick =
+        function() {
+
+            editTask(title);
+
+        };
+
+
+
+    // =====================================
+    // DELETE BUTTON
+    // =====================================
+
+    var deleteButton =
+        document.createElement("button");
+
+    deleteButton.innerText =
+        "Delete";
+
+    deleteButton.className =
+        "delete-btn";
+
+
+    deleteButton.onclick =
+        function() {
+
+            deleteTask(li);
+
+        };
+
+
+
+    // =====================================
+    // CHECKBOX CHANGE EVENT
+    // =====================================
+
+    checkbox.addEventListener(
+        "change",
+        function() {
+
+            if (checkbox.checked) {
+
+                title.classList.add(
+                    "completed"
+                );
+
+            }
+
+            else {
+
+                title.classList.remove(
+                    "completed"
+                );
+
+            }
+
+        }
+    );
+
+
+
+    // =====================================
+    // ADD ELEMENTS TO LI
+    // =====================================
+
+    li.appendChild(checkbox);
+
+    li.appendChild(textContainer);
+
+    li.appendChild(editButton);
+
+    li.appendChild(deleteButton);
+
+
+
+    // Add task to list
+
+    taskList.appendChild(li);
+
+
+    updateTaskCount();
+
+}
+
+
+
+// =========================================
+// EDIT TASK
+// =========================================
+
+function editTask(title) {
+
+
+    var newTask =
+        prompt(
+            "Edit task:",
+            title.innerText
+        );
+
+
+    if (
+        newTask !== null &&
+        newTask.trim() !== ""
+    ) {
+
+        title.innerText =
+            newTask;
+
+    }
+
+}
+
+
+
+// =========================================
+// DELETE TASK
+// =========================================
+
+function deleteTask(li) {
+
+
+    li.remove();
+
+
+    updateTaskCount();
+
+}
+
+
+
+// =========================================
+// UPDATE TASK COUNT
+// =========================================
+
+function updateTaskCount() {
+
+
+    var total =
+        taskList.children.length;
+
+
+    taskCount.innerText =
+        "Total Tasks: " + total;
+
+}
+
+
+
+// =========================================
+// INPUT EVENT
+// =========================================
+
+taskName.addEventListener(
+    "input",
+    function() {
+
+        if (
+            taskName.value.trim() !== ""
+        ) {
+
+            document.getElementById(
+                "taskError"
+            ).innerText = "";
+
+        }
+
+    }
+);
+
+
+
+// =========================================
+// FOCUS EVENT
+// =========================================
+
+taskName.addEventListener(
+    "focus",
+    function() {
+
+        taskName.style.backgroundColor =
+            "#f0f6ff";
+
+    }
+);
+
+
+
+// =========================================
+// BLUR EVENT
+// =========================================
+
+taskName.addEventListener(
+    "blur",
+    function() {
+
+        taskName.style.backgroundColor =
+            "white";
+
+    }
+);
+
+
+
+// =========================================
+// CHANGE EVENT
+// =========================================
+
+priority.addEventListener(
+    "change",
+    function() {
+
+        if (priority.value !== "") {
+
+            document.getElementById(
+                "priorityError"
+            ).innerText = "";
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
+

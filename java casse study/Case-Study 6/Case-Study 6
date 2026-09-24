@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Operations in JavaScript</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f6fb;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h2 {
+            color: #1a5cff;
+        }
+
+        .box {
+            background-color: white;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: #1a5cff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0d3fb0;
+        }
+
+        .result {
+            background-color: #f8fafc;
+            padding: 12px;
+            margin-top: 15px;
+            border-left: 4px solid #1a5cff;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>String Operations using JavaScript</h2>
+    <h3>Sanvi Wadhankar 24070521191</h3>
+
+    <!-- =========================
+         BASIC STRING OPERATIONS
+    ========================== -->
+
+    <div class="box">
+
+        <h3>1. Basic String Operations</h3>
+
+        <input
+            type="text"
+            id="stringInput"
+            placeholder="Enter a string"
+        >
+
+        <button onclick="basicOperations()">
+            Perform Operations
+        </button>
+
+        <div id="basicResult" class="result"></div>
+
+    </div>
+
+
+    <!-- =========================
+         REVERSE STRING
+    ========================== -->
+
+    <div class="box">
+
+        <h3>2. Reverse a String</h3>
+
+        <input
+            type="text"
+            id="reverseInput"
+            placeholder="Enter a string"
+        >
+
+        <button onclick="reverseString()">
+            Reverse
+        </button>
+
+        <div id="reverseResult" class="result"></div>
+
+    </div>
+
+
+    <!-- =========================
+         VOWEL COUNT
+    ========================== -->
+
+    <div class="box">
+
+        <h3>3. Count Vowels in a Paragraph</h3>
+
+        <textarea
+            id="paragraph"
+            placeholder="Enter a paragraph here..."
+        ></textarea>
+
+        <button onclick="countVowels()">
+            Count Vowels
+        </button>
+
+        <div id="vowelResult" class="result"></div>
+
+    </div>
+
+
+
+    <script>
+
+        // ==========================================
+        // 1. BASIC STRING OPERATIONS
+        // ==========================================
+
+        function basicOperations() {
+
+            var str =
+                document.getElementById("stringInput").value;
+
+
+            if (str === "") {
+
+                alert("Please enter a string!");
+
+                return;
+            }
+
+
+            // Length
+            var length =
+                str.length;
+
+
+            // substring()
+            var substring =
+                str.substring(0, 5);
+
+
+            // indexOf()
+            var index =
+                str.indexOf("a");
+
+
+            // split()
+            var words =
+                str.split(" ");
+
+
+            // replace()
+            var replaced =
+                str.replace(/a/gi, "@");
+
+
+            // toUpperCase()
+            var upper =
+                str.toUpperCase();
+
+
+            // toLowerCase()
+            var lower =
+                str.toLowerCase();
+
+
+            document.getElementById("basicResult").innerHTML =
+
+                "<b>Original String:</b> " + str +
+
+                "<br><b>Length:</b> " + length +
+
+                "<br><b>substring(0,5):</b> " + substring +
+
+                "<br><b>indexOf('a'):</b> " + index +
+
+                "<br><b>split(' '):</b> " +
+                words.join(" | ") +
+
+                "<br><b>replace(/a/gi, '@'):</b> " +
+                replaced +
+
+                "<br><b>Uppercase:</b> " +
+                upper +
+
+                "<br><b>Lowercase:</b> " +
+                lower;
+        }
+
+
+
+        // ==========================================
+        // 2. REVERSE A STRING
+        // ==========================================
+
+        function reverseString() {
+
+            var str =
+                document.getElementById("reverseInput").value;
+
+
+            if (str === "") {
+
+                alert("Please enter a string!");
+
+                return;
+            }
+
+
+            /*
+                split("")
+                converts string into an array
+
+                reverse()
+                reverses the array
+
+                join("")
+                converts array back into string
+            */
+
+            var reversed =
+                str.split("").reverse().join("");
+
+
+            document.getElementById("reverseResult").innerHTML =
+
+                "<b>Original:</b> " + str +
+
+                "<br><b>Reversed:</b> " + reversed;
+        }
+
+
+
+        // ==========================================
+        // 3. COUNT VOWELS USING REGEX
+        // ==========================================
+
+        function countVowels() {
+
+            var paragraph =
+                document.getElementById("paragraph").value;
+
+
+            if (paragraph === "") {
+
+                alert("Please enter a paragraph!");
+
+                return;
+            }
+
+
+            /*
+                Regex:
+
+                [aeiou]
+                matches any vowel
+
+                gi
+                g = global search
+                i = case insensitive
+            */
+
+            var vowels =
+                paragraph.match(/[aeiou]/gi);
+
+
+            var count =
+                vowels ? vowels.length : 0;
+
+
+            document.getElementById("vowelResult").innerHTML =
+
+                "<b>Number of vowels:</b> " + count;
+        }
+
+    </script>
+
+</body>
+</html>
+
